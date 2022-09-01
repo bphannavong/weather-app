@@ -27,4 +27,12 @@ module.exports = {
       template: "src/template.html",
     }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    watchFiles: ["src/template.html"],
+    compress: true,
+    port: 3000,
+  },
 };

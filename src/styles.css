@@ -1,3 +1,51 @@
-h1 {
-  color: red;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+#content {
+  display: grid;
+  grid-template: 1fr 2fr / 1fr 1fr;
+  border: 1px solid red;
+  width: 80%;
+  height: 25%;
+  border-radius: 5px;
+  place-items: center;
+}
+
+#content > div {
+  border: 1px solid red;
+}
+
+#top-stats {
+  display: grid;
+  grid-column: 1 / -1;
+}
+
+#city {
+  color: gray;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#units:after {
+  content: "F";
+}
+
+#units.metric:after {
+  background-color: red;
+  content: "C";
 }

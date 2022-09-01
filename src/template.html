@@ -7,6 +7,26 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <div><h1>hey</h1></div>
+    <form>
+      <input type="text" id="query" />
+      <button type="button" id="submit">Submit</button>
+    </form>
+
+    <div id="content">
+      <div id="top-stats">
+        <div id="sky"></div>
+        <div id="city"></div>
+      </div>
+      <div id="left-stats">
+        <div id="temp-main"></div>
+        <button type="button" id="units"></button>
+      </div>
+      <div id="right-stats">
+        <div id="feels-like"></div>
+        <div id="temp-high"></div>
+        <div id="temp-low"></div>
+        <div id="humidity"></div>
+      </div>
+    </div>
   </body>
 </html>
