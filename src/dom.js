@@ -11,7 +11,6 @@ const tempLow = document.getElementById("temp-low");
 const humidity = document.getElementById("humidity");
 
 function updateDOM(stats) {
-  console.log("hi");
   city.innerHTML = stats.city;
   sky.innerHTML = stats.sky;
   temp.innerHTML = stats.temp;

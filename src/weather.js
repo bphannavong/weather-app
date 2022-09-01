@@ -10,7 +10,7 @@ async function processStats(stats) {
   const feelsLike = stats.main.feels_like;
   const tempHigh = stats.main.temp_max;
   const tempLow = stats.main.temp_min;
-  const humidity = stats.main.temp.humidity;
+  const humidity = stats.main.humidity;
 
   return await {
     sky,
@@ -31,14 +31,12 @@ async function getStats(city) {
     }
   );
   const stats = await response.json();
+  console.log(stats);
   const processedStats = processStats(stats);
   processedStats.then((data) => {
     console.log(data);
     events.publish("weatherStats", data);
   });
 }
-function cLog(data) {
-  console.log(data);
-}
 
-events.subscribe("cityChanged", cLog);
+events.subscribe("cityChanged", getStats);
