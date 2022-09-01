@@ -7,6 +7,30 @@
     <title>Weather App</title>
   <script defer src="bundle.js"></script></head>
   <body>
-    <div><h1>heys</h1></div>
+    <div id="form" class="visible">
+      <div>Open Weather</div>
+      <form>
+        <input type="text" id="query" name="query" />
+        <button type="reset" id="submit">Submit</button>
+      </form>
+    </div>
+
+    <div id="content">
+      <div id="top-stats">
+        <div id="sky"></div>
+        <div id="city"></div>
+        <div id="country"></div>
+      </div>
+      <div id="left-stats">
+        <div id="temp-main"></div>
+        <button type="button" id="units"></button>
+      </div>
+      <div id="right-stats">
+        <div id="feels-like"></div>
+        <div id="temp-high"></div>
+        <div id="temp-low"></div>
+        <div id="humidity"></div>
+      </div>
+    </div>
   </body>
 </html>

@@ -14,7 +14,8 @@ const humidity = document.getElementById("humidity");
 const form = document.getElementById("form");
 const content = document.getElementById("content");
 
-function updateDOM(stats) {
+//updates content with
+function updateContent(stats) {
   city.innerHTML = stats.city;
   country.innerHTML = stats.country;
   sky.innerHTML = stats.sky;
@@ -23,15 +24,27 @@ function updateDOM(stats) {
   tempHigh.innerHTML = `Today's High: ${stats.tempHigh}`;
   tempLow.innerHTML = `Today's Low: ${stats.tempLow}`;
   humidity.innerHTML = `Humidity: ${stats.humidity}%`;
+
+  show(content);
 }
 
 //sends query to fetch
 function searchWeather() {
   const query = document.getElementById("query").value;
-  events.publish("cityChanged", query);
+  events.publish("cityQueried", query);
 }
 
 //functions to convert units F / C
+function changeUnits(e) {
+  e.target.classList.toggle("metric");
+  events.publish("unitsChanged"); //send out whether metric or imperial
+}
+
+/* function button {
+    gets update that button class was changed
+    sends message to change units of dom / stats
+}
+*/
 
 //function to change visibility of cards
 function show(section) {
@@ -42,6 +55,10 @@ function show(section) {
     form.className = "";
     content.className = "visible";
   }
+}
+
+function backToForm() {
+  show(form);
 }
 
 //submits form on enter
@@ -55,7 +72,7 @@ function checkEnter(e) {
 //alerts error and displays form again
 function showError(err) {
   alert(err);
-  show(content);
+  show(form);
 }
 
 //bind events
@@ -64,11 +81,12 @@ submit.addEventListener("click", searchWeather);
 
 const query = document.getElementById("query");
 query.addEventListener("keypress", checkEnter);
-events.subscribe("weatherStats", updateDOM);
 
+const back = document.getElementById("back");
+back.addEventListener("click", backToForm);
+
+const unitsBtn = document.getElementById("units");
+unitsBtn.addEventListener("click", changeUnits);
+
+events.subscribe("weatherStats", updateContent);
 events.subscribe("notFound", showError);
-/* function button {
-    gets update that button class was changed
-    sends message to change units of dom / stats
-}
-*/

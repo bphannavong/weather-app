@@ -2,7 +2,7 @@ import events from "./mediator.js";
 
 import("./mediator.js");
 
-async function processStats(stats) {
+function processStats(stats) {
   //take data from fetch and turn into display data
   const sky = stats.weather[0].description;
   const city = stats.name;
@@ -25,22 +25,21 @@ async function processStats(stats) {
   };
 }
 
-async function getStats(city) {
+async function getStats(query) {
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=ecd26b108dfa2ef49786d327842bf4b9&units=imperial`,
+      `http://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=ecd26b108dfa2ef49786d327842bf4b9&units=imperial`,
       {
         mode: "cors",
       }
     );
     const stats = await response.json();
-    console.log(stats);
-    const processedStats = await processStats(stats);
-    console.log(processedStats);
+    const processedStats = processStats(stats);
+
     events.publish("weatherStats", processedStats);
   } catch {
     events.publish("notFound", "No matching city found");
   }
 }
 
-events.subscribe("cityChanged", getStats);
+events.subscribe("cityQueried", getStats);

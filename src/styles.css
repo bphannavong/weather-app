@@ -32,20 +32,42 @@ body {
 
 #content {
   display: none;
-
+  position: relative;
   grid-template: 1fr 2fr / 1fr 1fr;
   border: 1px solid red;
   width: 80%;
   height: 25%;
   border-radius: 5px;
   place-items: center;
+  opacity: 0;
+}
+
+#back {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: background-color 0.2s ease-out;
+}
+
+#back:hover {
+  background-color: darkgray;
 }
 
 #form.visible,
 #content.visible {
   display: grid;
+  opacity: 1;
 }
 
+#form,
+#content {
+  transition: opacity 2s;
+}
 #content > div {
   border: 1px solid red;
 }
@@ -69,4 +91,10 @@ body {
 #units.metric:after {
   background-color: red;
   content: "C";
+}
+
+input {
+  width: 200px;
+  height: 3rem;
+  padding: 1rem;
 }
