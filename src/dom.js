@@ -11,6 +11,8 @@ const feelsLike = document.getElementById("feels-like");
 const tempHigh = document.getElementById("temp-high");
 const tempLow = document.getElementById("temp-low");
 const humidity = document.getElementById("humidity");
+const form = document.getElementById("form");
+const content = document.getElementById("content");
 
 function updateDOM(stats) {
   city.innerHTML = stats.city;
@@ -31,6 +33,17 @@ function searchWeather() {
 
 //functions to convert units F / C
 
+//function to change visibility of cards
+function show(section) {
+  if (section === form) {
+    form.className = "visible";
+    content.className = "";
+  } else if (section === content) {
+    form.className = "";
+    content.className = "visible";
+  }
+}
+
 //submits form on enter
 function checkEnter(e) {
   if (e.key === "Enter") {
@@ -39,9 +52,12 @@ function checkEnter(e) {
   }
 }
 
+//alerts error and displays form again
 function showError(err) {
   alert(err);
+  show(content);
 }
+
 //bind events
 const submit = document.getElementById("submit");
 submit.addEventListener("click", searchWeather);

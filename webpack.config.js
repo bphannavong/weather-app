@@ -31,7 +31,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "dist"),
     },
-    watchFiles: ["src/template.html"],
+    watchFiles: ["src/..."],
     compress: true,
     port: 3000,
   },
