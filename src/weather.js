@@ -2,6 +2,7 @@ import events from "./mediator.js";
 
 import("./mediator.js");
 
+//global variables
 let stats;
 let units = "imperial";
 
@@ -58,6 +59,7 @@ function kToC(temp) {
 function convertStats(system) {
   let copy = structuredClone(stats);
   let fn;
+
   if (system === "imperial") {
     //return stats -> temps converted to imp
     fn = kToF;
@@ -65,6 +67,7 @@ function convertStats(system) {
     //return stats -> temps converted to metric
     fn = kToC;
   }
+
   copy.temp = Math.round(fn(copy.temp));
   copy.feelsLike = Math.round(fn(copy.feelsLike));
   copy.tempHigh = Math.round(fn(copy.tempHigh));
@@ -86,5 +89,6 @@ function changeUnits(system) {
   sendStats();
 }
 
+//bind events
 events.subscribe("cityQueried", getStats);
 events.subscribe("unitsChanged", changeUnits);

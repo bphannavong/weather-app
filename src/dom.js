@@ -20,11 +20,11 @@ unitsBtn.addEventListener("click", changeUnits);
 function updateContent(stats) {
   city.innerHTML = stats.city;
   country.innerHTML = stats.country;
-  sky.innerHTML = stats.sky;
-  temp.innerHTML = stats.temp;
-  feelsLike.innerHTML = `Feels like: ${stats.feelsLike}`;
-  tempHigh.innerHTML = `Today's High: ${stats.tempHigh}`;
-  tempLow.innerHTML = `Today's Low: ${stats.tempLow}`;
+  sky.innerHTML = capitalize(stats.sky);
+  temp.innerHTML = `${stats.temp}º`;
+  feelsLike.innerHTML = `Feels like: ${stats.feelsLike}º`;
+  tempHigh.innerHTML = `Today's High: ${stats.tempHigh}º`;
+  tempLow.innerHTML = `Today's Low: ${stats.tempLow}º`;
   humidity.innerHTML = `Humidity: ${stats.humidity}%`;
   unitsBtn.className = stats.units;
 
@@ -84,6 +84,12 @@ function showError(err) {
   show(form);
 }
 
+function capitalize(str) {
+  const lower = str.toLowerCase().split(" ");
+  return lower
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 //bind events
 const submit = document.getElementById("submit");
 submit.addEventListener("click", searchWeather);
