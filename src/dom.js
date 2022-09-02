@@ -13,6 +13,8 @@ const tempLow = document.getElementById("temp-low");
 const humidity = document.getElementById("humidity");
 const form = document.getElementById("form");
 const content = document.getElementById("content");
+const unitsBtn = document.getElementById("units");
+unitsBtn.addEventListener("click", changeUnits);
 
 //updates content with
 function updateContent(stats) {
@@ -24,6 +26,7 @@ function updateContent(stats) {
   tempHigh.innerHTML = `Today's High: ${stats.tempHigh}`;
   tempLow.innerHTML = `Today's Low: ${stats.tempLow}`;
   humidity.innerHTML = `Humidity: ${stats.humidity}%`;
+  unitsBtn.className = stats.units;
 
   show(content);
 }
@@ -36,8 +39,14 @@ function searchWeather() {
 
 //functions to convert units F / C
 function changeUnits(e) {
-  e.target.classList.toggle("metric");
-  events.publish("unitsChanged"); //send out whether metric or imperial
+  let newUnit;
+  if (e.target.classList.contains("imperial")) {
+    newUnit = "metric";
+  } else if (e.target.classList.contains("metric")) {
+    newUnit = "imperial";
+  }
+  e.target.className = newUnit;
+  events.publish("unitsChanged", newUnit); //send out whether metric or imperial
 }
 
 /* function button {
@@ -84,9 +93,6 @@ query.addEventListener("keypress", checkEnter);
 
 const back = document.getElementById("back");
 back.addEventListener("click", backToForm);
-
-const unitsBtn = document.getElementById("units");
-unitsBtn.addEventListener("click", changeUnits);
 
 events.subscribe("weatherStats", updateContent);
 events.subscribe("notFound", showError);
